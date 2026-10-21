@@ -23,9 +23,19 @@ app.get('/api/search', async (req, res) => {
       const snippetEl = $(el).find('.result__snippet');
       
       if (titleEl.length) {
+        let rawUrl = titleEl.attr('href');
+        let finalUrl = rawUrl;
+
+        if (rawUrl && rawUrl.includes('uddg=')) {
+          try {
+            const urlObj = new URL(rawUrl, 'https://duckduckgo.com');
+            finalUrl = decodeURIComponent(urlObj.searchParams.get('uddg'));
+          } catch (e) {}
+        }
+
         results.push({
           title: titleEl.text().trim(),
-          url: titleEl.attr('href'),
+          url: finalUrl,
           snippet: snippetEl.text().trim()
         });
       }
