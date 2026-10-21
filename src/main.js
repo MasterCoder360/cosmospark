@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
       resultsContainer.scrollTop = 0;
 
       try {
-        const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const response = await fetch(`https://cosmospark-backend.onrender.com/api/search?q=${encodeURIComponent(query)}`);
         const data = await response.json();
         renderResults(data.results);
       } catch (error) {
