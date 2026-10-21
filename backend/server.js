@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
 
 const app = express();
 app.use(cors());
@@ -9,18 +11,29 @@ app.get('/api/search', async (req, res) => {
   if (!query) return res.status(400).json({ error: 'Query is required' });
 
   try {
-    const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`);
-    const data = await response.json();
+    const targetUrl = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
+    const scraperUrl = `http://api.scraperapi.com?api_key=${process.env.SCRAPER_API_KEY}&url=${encodeURIComponent(targetUrl)}`;
+    
+    const response = await axios.get(scraperUrl);
+    const $ = cheerio.load(response.data);
+    const results = [];
 
-    const results = data.query.search.map(item => ({
-      title: item.title,
-      url: `https://en.wikipedia.org/wiki/${encodeURIComponent(item.title.replace(/ /g, '_'))}`,
-      snippet: item.snippet.replace(/<[^>]*>?/gm, '')
-    }));
+    $('.result').each((i, el) => {
+      const titleEl = $(el).find('.result__title a');
+      const snippetEl = $(el).find('.result__snippet');
+      
+      if (titleEl.length) {
+        results.push({
+          title: titleEl.text().trim(),
+          url: titleEl.attr('href'),
+          snippet: snippetEl.text().trim()
+        });
+      }
+    });
 
     res.json({ results });
   } catch (error) {
-    console.error('Search Error:', error);
+    console.error('Search Error:', error.message);
     res.status(500).json({ error: 'Failed to fetch results' });
   }
 });
