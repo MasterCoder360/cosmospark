@@ -124,7 +124,7 @@ body::before {
   position: absolute;
   top: 24px;
   left: 50%;
-  transform: translateX(-50%); /* Centers the element horizontally */
+  transform: translateX(-50%); 
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
