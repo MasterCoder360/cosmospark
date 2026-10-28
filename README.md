@@ -8,5 +8,5 @@ The safest web browser that uses a backend that doesn't collect IP addresses.
 - Scrapes DuckDuckGo using backend not your IP address
 - Space-themed!
 ### How it works
-It works using a backend that scrapes DuckDuckGo results, so that way, it doesn't use your computer browser so hackers can't see what YOU searched up. Nothing you search up saves in the backend, nor your computer search history, so it is basically incognito mode for search. 
+It works using a backend that scrapes DuckDuckGo results, so that way, it doesn't use your computer browser so hackers can't see what YOU searched up. Nothing you search up saves in the backend, nor your computer search history, so it is basically incognito mode, but for searching. 
 
