@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://sitemaps.org">
+  
+  <!-- Main Studio & Extension Homepage -->
+  <url>
+    <loc>https://cosmospark.org</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- CodeVent Labs Hub (Helps pass authority to your subdomain) -->
+  <url>
+    <loc>https://labs.cosmospark.org</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
